@@ -1,0 +1,256 @@
+/* Content script styles for the injected TextAlchemy widget */
+#text-alchemy-widget {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2147483647;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.tf-widget-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.tf-widget-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  max-width: 500px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.tf-widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tf-widget-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.tf-widget-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.tf-widget-controls button {
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 4px;
+  background: #e2e8f0;
+  color: #64748b;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.tf-widget-controls button:hover {
+  background: #cbd5e1;
+  color: #475569;
+}
+
+#tf-close:hover {
+  background: #ef4444;
+  color: white;
+}
+
+.tf-widget-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.tf-input-section {
+  padding: 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+#tf-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  resize: none;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.4;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+#tf-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.tf-results-section {
+  flex: 1;
+  overflow: auto;
+  padding: 0 20px 20px;
+}
+
+.tf-results-container,
+.tf-more-results {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tf-style-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #f8fafc;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.tf-style-item:hover {
+  background: #f1f5f9;
+}
+
+.tf-style-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.tf-style-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.tf-style-result {
+  font-size: 14px;
+  color: #1e293b;
+  word-break: break-all;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+}
+
+.tf-copy-btn {
+  padding: 6px 12px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.tf-copy-btn:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+.tf-copy-btn:disabled {
+  background: #e2e8f0;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.tf-copy-btn.tf-copied {
+  background: #10b981;
+}
+
+.tf-more-section {
+  margin: 20px 0;
+}
+
+.tf-more-button {
+  width: 100%;
+  padding: 12px;
+  background: #f1f5f9;
+  color: #475569;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.tf-more-button:hover {
+  background: #e2e8f0;
+}
+
+.tf-more-results {
+  margin-top: 12px;
+}
+
+/* Scrollbar styling */
+.tf-results-section::-webkit-scrollbar {
+  width: 6px;
+}
+
+.tf-results-section::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.tf-results-section::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.tf-results-section::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .tf-widget-overlay {
+    padding: 10px;
+  }
+  
+  .tf-widget-container {
+    max-width: none;
+    height: 90vh;
+  }
+  
+  .tf-widget-header {
+    padding: 12px 16px;
+  }
+  
+  .tf-input-section {
+    padding: 16px;
+  }
+  
+  .tf-results-section {
+    padding: 0 16px 16px;
+  }
+}

@@ -1,12 +1,12 @@
-# 🎨 TextAlchemy - Chrome Extension
+# TextAlchemy - Chrome Extension
 
 Transform your plain text into magical Unicode styles! Perfect for social media posts, messages, and anywhere you want your text to stand out.
 
-## ✨ What is TextAlchemy?
+## What is TextAlchemy?
 
 TextAlchemy is a powerful Chrome extension that transforms ordinary text into eye-catching Unicode styles. Whether you're posting on social media, writing messages, or creating content, TextAlchemy gives you 25+ unique text formatting options with just one click.
 
-## 🚀 Features
+## Features
 
 - **25+ Text Styles**: Bold, Italic, Cursive, Bubble, Upside Down, and many more
 - **Dual Mode**: Works as popup or floating widget on any webpage
@@ -16,7 +16,7 @@ TextAlchemy is a powerful Chrome extension that transforms ordinary text into ey
 - **No Sign-Up Required**: Works offline, no accounts needed
 - **Context Menu Integration**: Right-click selected text for quick formatting
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 - **Vite**: Lightning-fast development and hot module replacement
 - **TypeScript**: Type safety and enhanced productivity
@@ -25,7 +25,7 @@ TextAlchemy is a powerful Chrome extension that transforms ordinary text into ey
 - **Tailwind CSS**: Utility-first CSS framework
 - **DaisyUI**: Beautiful and customizable UI components
 
-## 🎯 How to Use
+## How to Use
 
 ### Popup Mode
 1. Click the TextAlchemy icon in Chrome toolbar
@@ -48,7 +48,7 @@ TextAlchemy is a powerful Chrome extension that transforms ordinary text into ey
 2. Right-click and choose "TextAlchemy"
 3. Select a quick style or "Open TextAlchemy" for full options
 
-## 🎨 Available Text Styles
+## Available Text Styles
 
 ### Top 10 (Always Visible)
 1. **Bold** - 𝐁𝐨𝐥𝐝 𝐭𝐞𝐱𝐭
@@ -77,7 +77,7 @@ TextAlchemy is a powerful Chrome extension that transforms ordinary text into ey
 - **Air Quotes** - "Air quotes"
 - **Ransom Note** - rAnSoM nOtE
 
-## 🚀 Development
+## Development
 
 ### Prerequisites
 - Node.js >= 20.x
@@ -96,7 +96,7 @@ TextAlchemy is a powerful Chrome extension that transforms ordinary text into ey
 4. Select the `dist` folder after building
 5. The extension should now appear in your toolbar
 
-## 📦 Installation
+## Installation
 
 ### Method 1: Download from GitHub
 1. Go to the [Releases page](../../releases) 
@@ -121,7 +121,29 @@ pnpm build
 - **Compatibility**: Works on all websites, no external dependencies
 - **Storage**: Settings sync across devices, usage stats stored locally
 
-## 🤝 Contributing
+## Troubleshooting
+
+### Extension Not Loading
+- Ensure all files are in the correct folder structure
+- Check that manifest.json is valid JSON
+- Verify Developer mode is enabled in Chrome extensions
+
+### Styles Not Working
+- Some Unicode characters may not display on all devices/browsers
+- Older systems might show replacement characters (□ or ?)
+- This is normal behavior for Unicode text formatting
+
+### Keyboard Shortcut Not Working
+- Make sure you're pressing Ctrl/Cmd + Shift + F (not just Ctrl + F)
+- Try refreshing the page if the content script didn't load
+- Check if another extension is using the same shortcut
+
+### Copy Function Issues
+- Modern browsers require HTTPS for clipboard API
+- Extension falls back to legacy copy method automatically
+- Try clicking copy again if it doesn't work the first time
+
+## Contributing
 
 We welcome contributions to improve TextAlchemy! Whether you'd like to:
 - Fix a bug
@@ -131,6 +153,6 @@ We welcome contributions to improve TextAlchemy! Whether you'd like to:
 
 Your contributions are highly valued!
 
-## 📄 License
+## License
 
 This extension is provided as-is for educational and personal use. The Unicode transformations are based on standard Unicode character mappings.
