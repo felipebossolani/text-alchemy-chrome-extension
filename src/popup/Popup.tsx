@@ -99,49 +99,58 @@ export default function Popup(): React.JSX.Element {
       </div>
 
       {/* Styles Section */}
-      <div className="flex-1 px-5 pb-2 overflow-y-auto">
+      <div className="flex-1 px-5 pb-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
         <div className="flex justify-between items-center mt-2 mb-2">
           <h2 className="text-lg font-bold text-[#6C3EF4]">Text Styles</h2>
         </div>
-        <div className="space-y-2">
-          {formattedTexts.map(({ key, style, text }) => (
-            <div key={key} className="bg-white shadow flex items-center px-4 py-3 gap-3 border border-gray-100">
-              {/* Style Type Title */}
-              <div className="w-20 flex-shrink-0">
-                <div className="text-sm font-semibold text-[#6C3EF4]">
-                  {style.name}
-                </div>
-              </div>
-              
-              {/* Transformed Text Result */}
-              <div className="flex-1 min-w-0">
-                <div className="text-sm font-mono break-all text-gray-800">{text}</div>
-              </div>
-              
-              {/* Copy Button */}
-              <div className="flex-shrink-0">
-                <button
-                  type="button"
-                  className={`btn btn-xs px-3 transition-colors duration-200 ${copiedStyle === key ? 'bg-green-500 text-white' : 'bg-gradient-to-r from-[#6C3EF4] to-[#A259F7] text-white hover:from-[#7d4ffb] hover:to-[#b07cff]'}`}
-                  onClick={() => copyToClipboard(text, key)}
-                >
-                  {copiedStyle === key ? 'Copied!' : 'Copy'}
-                </button>
+        <div className="space-y-2 min-h-[200px]">
+          {formattedTexts.length === 0 ? (
+            <div className="flex items-center justify-center h-32 text-gray-400">
+              <div className="text-center">
+                <div className="text-lg mb-2">✨</div>
+                <div className="text-sm">Type something to see magical styles</div>
               </div>
             </div>
-          ))}
+          ) : (
+            <>
+              {formattedTexts.map(({ key, style, text }) => (
+                <div key={key} className="bg-white shadow flex items-center px-4 py-3 gap-3 border border-gray-100">
+                  {/* Style Type Title */}
+                  <div className="w-20 flex-shrink-0">
+                    <div className="text-sm font-semibold text-[#6C3EF4]">
+                      {style.name}
+                    </div>
+                  </div>
+                  
+                  {/* Transformed Text Result */}
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-mono break-all text-gray-800">{text}</div>
+                  </div>
+                  
+                  {/* Copy Button */}
+                  <div className="flex-shrink-0">
+                    <button
+                      type="button"
+                      className={`btn btn-xs px-3 transition-colors duration-200 ${copiedStyle === key ? 'bg-green-500 text-white' : 'bg-gradient-to-r from-[#6C3EF4] to-[#A259F7] text-white hover:from-[#7d4ffb] hover:to-[#b07cff]'}`}
+                      onClick={() => copyToClipboard(text, key)}
+                    >
+                      {copiedStyle === key ? 'Copied!' : 'Copy'}
+                    </button>
+                  </div>
+                </div>
+              ))}
+              <div className="mt-4 text-center">
+                <button
+                  type="button"
+                  className="btn btn-outline btn-sm border-[#A259F7] text-[#6C3EF4] hover:bg-violet-50"
+                  onClick={() => setShowMore(!showMore)}
+                >
+                  {showMore ? 'Show Less Styles' : 'Show More Styles'}
+                </button>
+              </div>
+            </>
+          )}
         </div>
-        {formattedTexts.length > 0 && (
-          <div className="mt-4 text-center">
-            <button
-              type="button"
-              className="btn btn-outline btn-sm border-[#A259F7] text-[#6C3EF4] hover:bg-violet-50"
-              onClick={() => setShowMore(!showMore)}
-            >
-              {showMore ? 'Show Less Styles' : 'Show More Styles'}
-            </button>
-          </div>
-        )}
       </div>
 
       {/* Footer */}
