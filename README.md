@@ -87,7 +87,7 @@ TextAlchemy is a powerful Chrome extension that transforms ordinary text into ey
 1. Clone the repository
 2. Install dependencies: `pnpm install`
 3. Start development: `pnpm dev`
-4. Build for production: `pnpm build`
+4. Build for production: `pnpm build:all`
 
 ### Load Extension
 1. Open Chrome and go to `chrome://extensions/`
@@ -109,8 +109,22 @@ TextAlchemy is a powerful Chrome extension that transforms ordinary text into ey
 git clone https://github.com/YOUR_USERNAME/text-alchemy-chrome-extension.git
 cd text-alchemy-chrome-extension
 pnpm install
-pnpm build
+pnpm build:all
 ```
+
+### Build for Production
+
+To build the extension (including all popup styles), run:
+
+```sh
+pnpm build:all
+```
+
+This will:
+- Build the extension with Vite
+- Generate the popup CSS with all Tailwind/DaisyUI styles for the popup
+
+Then, load the `dist` folder in Chrome as your unpacked extension.
 
 ## Technical Details
 
