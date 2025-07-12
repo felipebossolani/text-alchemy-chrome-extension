@@ -84,16 +84,17 @@ export default function Popup(): React.JSX.Element {
         />
         <div className="flex justify-between items-center mt-1">
           <span className="text-xs text-gray-400">{inputText.length}/500</span>
-          <div className="flex gap-2">
-            <button
-              type="button"
-              className="btn btn-sm bg-gradient-to-r from-[#6C3EF4] to-[#A259F7] text-white border-0 shadow hover:from-[#7d4ffb] hover:to-[#b07cff]"
-              onClick={clearText}
-              disabled={!inputText}
-            >
-              Clear
-            </button>
-          </div>
+          {inputText && (
+            <div className="flex gap-2">
+              <button
+                type="button"
+                className="btn btn-sm bg-gradient-to-r from-[#6C3EF4] to-[#A259F7] text-white border-0 shadow hover:from-[#7d4ffb] hover:to-[#b07cff]"
+                onClick={clearText}
+              >
+                Clear
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
