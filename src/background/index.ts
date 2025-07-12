@@ -105,7 +105,7 @@ class TextAlchemyBackground {
   }
 
   // Handle messages from content scripts and popup
-  handleMessage(request: ExtensionMessage, sender: chrome.runtime.MessageSender, sendResponse: (response?: any) => void): boolean | void {
+  handleMessage(request: ExtensionMessage, _sender: chrome.runtime.MessageSender, sendResponse: (response?: any) => void): boolean | void {
     switch (request.action) {
       case 'getSettings':
         this.getSettings().then(sendResponse);
