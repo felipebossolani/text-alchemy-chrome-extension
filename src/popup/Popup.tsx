@@ -53,7 +53,7 @@ export default function Popup(): React.JSX.Element {
   }, []);
 
   return (
-    <div className="w-96 min-h-[600px] bg-base-100 shadow-xl overflow-hidden flex flex-col" data-theme="light">
+    <div className="w-[500px] min-h-[600px] bg-base-100 shadow-xl overflow-hidden flex flex-col" data-theme="light">
       {/* Header */}
       <div className="flex flex-col items-center justify-center py-4 px-2 bg-gradient-to-br from-[#6C3EF4] to-[#A259F7] relative">
         <img
