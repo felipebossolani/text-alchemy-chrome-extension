@@ -94,22 +94,31 @@ export default function Popup(): React.JSX.Element {
         <div className="flex justify-between items-center mt-2 mb-2">
           <h2 className="text-lg font-bold text-[#6C3EF4]">Text Styles</h2>
         </div>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="space-y-2">
           {formattedTexts.map(({ key, style, text }) => (
-            <div key={key} className="bg-white shadow flex flex-col px-3 py-2 gap-2 border border-gray-100">
-              <div className="flex-1 min-w-0">
-                <div className="text-xs font-semibold text-[#6C3EF4] mb-1">
+            <div key={key} className="bg-white shadow flex items-center px-4 py-3 gap-3 border border-gray-100">
+              {/* Style Type Title */}
+              <div className="w-20 flex-shrink-0">
+                <div className="text-sm font-semibold text-[#6C3EF4]">
                   {style.name}
                 </div>
-                <div className="text-xs font-mono break-all text-gray-800 line-clamp-3">{text}</div>
               </div>
-              <button
-                type="button"
-                className={`btn btn-xs px-2 transition-colors duration-200 ${copiedStyle === key ? 'bg-green-500 text-white' : 'bg-gradient-to-r from-[#6C3EF4] to-[#A259F7] text-white hover:from-[#7d4ffb] hover:to-[#b07cff]'}`}
-                onClick={() => copyToClipboard(text, key)}
-              >
-                {copiedStyle === key ? 'Copied!' : 'Copy'}
-              </button>
+              
+              {/* Transformed Text Result */}
+              <div className="flex-1 min-w-0">
+                <div className="text-sm font-mono break-all text-gray-800">{text}</div>
+              </div>
+              
+              {/* Copy Button */}
+              <div className="flex-shrink-0">
+                <button
+                  type="button"
+                  className={`btn btn-xs px-3 transition-colors duration-200 ${copiedStyle === key ? 'bg-green-500 text-white' : 'bg-gradient-to-r from-[#6C3EF4] to-[#A259F7] text-white hover:from-[#7d4ffb] hover:to-[#b07cff]'}`}
+                  onClick={() => copyToClipboard(text, key)}
+                >
+                  {copiedStyle === key ? 'Copied!' : 'Copy'}
+                </button>
+              </div>
             </div>
           ))}
         </div>
