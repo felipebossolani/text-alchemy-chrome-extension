@@ -11,7 +11,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "preinstall": "npx only-allow pnpm",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "build:popup-css": "tailwindcss -c tailwind.popup.config.js -i ./src/popup/popup.css -o ./dist/src/popup/popup.css"
   },
   "dependencies": {
     "react": "^19.1.0",
