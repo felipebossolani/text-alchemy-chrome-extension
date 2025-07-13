@@ -32,19 +32,39 @@ function createFormatterWidget(initialText = '') {
   formatterWidget.innerHTML = `
     <div class="tf-widget-overlay">
       <div class="tf-widget-container">
+        <!-- Header with gradient background -->
         <div class="tf-widget-header">
-          <h3>TextAlchemy</h3>
+          <div class="tf-header-content">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="TextAlchemy" class="tf-icon" style="display: none;">
+            <h1 class="tf-title">TextAlchemy</h1>
+            <p class="tf-subtitle">Transform your text with magical styles</p>
+          </div>
           <div class="tf-widget-controls">
             <button id="tf-minimize" title="Minimize">−</button>
             <button id="tf-close" title="Close">×</button>
           </div>
         </div>
-        <div class="tf-widget-content">
-          <div class="tf-input-section">
-            <textarea id="tf-input" placeholder="Type your text here..." rows="3">${initialText}</textarea>
+        
+        <!-- Input Section -->
+        <div class="tf-input-section">
+          <textarea id="tf-input" placeholder="Type your text here..." maxlength="500">${initialText}</textarea>
+          <div class="tf-input-footer">
+            <span class="tf-char-count">0/500</span>
+            <button id="tf-clear" class="tf-clear-btn" style="display: none;">Clear</button>
           </div>
-          <div class="tf-results-section">
-            <div id="tf-results" class="tf-results-container"></div>
+        </div>
+        
+        <!-- Styles Section -->
+        <div class="tf-styles-section">
+          <div class="tf-styles-header">
+            <h2 class="tf-styles-title">Text Styles</h2>
+          </div>
+          <div class="tf-results-container">
+            <div id="tf-results" class="tf-results"></div>
+            <div id="tf-empty-state" class="tf-empty-state">
+              <div class="tf-empty-icon">✨</div>
+              <div class="tf-empty-text">Type something to see magical styles</div>
+            </div>
             <div class="tf-more-section">
               <button id="tf-show-more" class="tf-more-button">Show More Styles</button>
             </div>
@@ -69,6 +89,9 @@ function initializeWidget() {
   const showMoreBtn = document.getElementById('tf-show-more');
   const closeBtn = document.getElementById('tf-close');
   const minimizeBtn = document.getElementById('tf-minimize');
+  const clearBtn = document.getElementById('tf-clear');
+  const charCount = document.querySelector('.tf-char-count');
+  const emptyState = document.getElementById('tf-empty-state');
 
   let isMinimized = false;
   let showingMore = false;
@@ -78,31 +101,61 @@ function initializeWidget() {
   showMoreBtn.addEventListener('click', toggleMoreStyles);
   closeBtn.addEventListener('click', removeFormatterWidget);
   minimizeBtn.addEventListener('click', toggleMinimize);
+  clearBtn.addEventListener('click', clearInput);
 
   // Initialize results
   updateResults();
 
   function updateResults() {
     const text = input.value;
-    const top10Styles = window.TextFormatter.getTop10();
-    const moreStyles = window.TextFormatter.getMoreStyles();
+    const textLength = text.length;
+    
+    // Update character count
+    charCount.textContent = `${textLength}/500`;
+    
+    // Show/hide clear button
+    if (text.length > 0) {
+      clearBtn.style.display = 'block';
+    } else {
+      clearBtn.style.display = 'none';
+    }
+    
+    // Show/hide empty state
+    if (text.trim().length === 0) {
+      emptyState.style.display = 'flex';
+      results.style.display = 'none';
+      showMoreBtn.style.display = 'none';
+    } else {
+      emptyState.style.display = 'none';
+      results.style.display = 'flex';
+      showMoreBtn.style.display = 'block';
+      
+      const top10Styles = window.TextFormatter.getTop10();
+      const moreStyles = window.TextFormatter.getMoreStyles();
 
-    // Update top 10 results
-    results.innerHTML = top10Styles.map(style => {
-      const formattedText = text ? window.TextFormatter.format(text, style.key) : '';
-      return createStyleItem(style, formattedText);
-    }).join('');
-
-    // Update more results if showing
-    if (showingMore) {
-      moreResults.innerHTML = moreStyles.map(style => {
-        const formattedText = text ? window.TextFormatter.format(text, style.key) : '';
+      // Update top 10 results
+      results.innerHTML = top10Styles.map(style => {
+        const formattedText = window.TextFormatter.format(text, style.key);
         return createStyleItem(style, formattedText);
       }).join('');
-    }
 
-    // Add copy event listeners
-    addCopyListeners();
+      // Update more results if showing
+      if (showingMore) {
+        moreResults.innerHTML = moreStyles.map(style => {
+          const formattedText = window.TextFormatter.format(text, style.key);
+          return createStyleItem(style, formattedText);
+        }).join('');
+      }
+
+      // Add copy event listeners
+      addCopyListeners();
+    }
+  }
+  
+  function clearInput() {
+    input.value = '';
+    updateResults();
+    input.focus();
   }
 
   function createStyleItem(style, formattedText) {
