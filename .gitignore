@@ -25,3 +25,6 @@ dist-ssr
 
 # Docs build output
 /dist-docs
+
+# Zip files (build artifacts)
+*.zip
