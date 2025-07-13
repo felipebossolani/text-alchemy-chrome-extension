@@ -14,11 +14,11 @@
     "prepare": "husky install",
     "build:popup-css": "tailwindcss -c tailwind.popup.config.js -i ./src/popup/popup.css -o ./dist/src/popup/popup.css",
     "build:all": "pnpm build && npx tailwindcss -i src/popup/index.css -o dist/popup.css --config tailwind.popup.config.js",
-    "docs:dev": "cd docs && npm run docs:dev",
-    "docs:build": "cd docs && npm run docs:build",
-    "docs:preview": "cd docs && npm run docs:preview",
-    "build:website": "npm run docs:build",
-    "build:everything": "npm run build:all && npm run build:website"
+    "docs:dev": "cd docs && pnpm run docs:dev",
+    "docs:build": "cd docs && pnpm run docs:build",
+    "docs:preview": "cd docs && pnpm run docs:preview",
+    "build:website": "pnpm run docs:build",
+    "build:everything": "pnpm run build:all && pnpm run build:website"
   },
   "dependencies": {
     "react": "^19.1.0",
