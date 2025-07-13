@@ -77,6 +77,12 @@ function addCopyListeners() {
 function removeFormatterWidget() {
   // Remove the tracked widget
   if (formatterWidget) {
+    // Remove keyboard event listener if it exists
+    if (formatterWidget.keydownHandler) {
+      document.removeEventListener('keydown', formatterWidget.keydownHandler);
+      console.log('TextAlchemy: Keyboard event listener removed');
+    }
+    
     formatterWidget.remove();
     formatterWidget = null;
   }
@@ -187,6 +193,20 @@ function initializeWidget() {
   showMoreBtn.addEventListener('click', toggleMoreStyles);
   closeBtn.addEventListener('click', removeFormatterWidget);
   clearBtn.addEventListener('click', clearInput);
+
+  // Keyboard event listener for Esc key
+  function handleKeyDown(event) {
+    if (event.key === 'Escape' && formatterWidget) {
+      console.log('TextAlchemy: Closing widget with Esc key');
+      removeFormatterWidget();
+    }
+  }
+
+  // Add keyboard event listener
+  document.addEventListener('keydown', handleKeyDown);
+  
+  // Store the handler reference so we can remove it later
+  formatterWidget.keydownHandler = handleKeyDown;
 
   // Initialize results
   updateResults();
