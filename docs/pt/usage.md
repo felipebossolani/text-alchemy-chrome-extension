@@ -6,7 +6,7 @@ Aprenda como aproveitar ao máximo os recursos do TextAlchemy.
 
 ## Atalhos de Teclado
 
-- `Ctrl/Cmd + Shift + F` - Abrir formatador flutuante
+- Selecione texto e clique com o botão direito para escolher "Abrir TextAlchemy"
 - `Escape` - Fechar formatador flutuante
 
 ## Menu de Contexto

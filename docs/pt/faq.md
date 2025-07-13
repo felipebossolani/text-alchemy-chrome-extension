@@ -49,7 +49,7 @@ Isso acontece em sistemas ou dispositivos mais antigos que não suportam certos 
 - Verifique se outra extensão está interferindo no acesso à área de transferência
 
 ### Como uso atalhos de teclado?
-Pressione `Ctrl/Cmd + Shift + F` em qualquer página da web para abrir o widget flutuante de formatação.
+Selecione qualquer texto em uma página da web, clique com o botão direito e escolha "Abrir TextAlchemy" para abrir o widget de formatação com seu texto selecionado pré-preenchido.
 
 ## Perguntas Técnicas
 

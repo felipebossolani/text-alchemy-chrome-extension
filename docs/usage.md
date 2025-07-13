@@ -4,9 +4,9 @@
 
 Learn how to make the most of TextAlchemy's features.
 
-## Keyboard Shortcuts
+## Context Menu
 
-- `Ctrl/Cmd + Shift + F` - Open floating formatter
+- Select text and right-click to choose "Open TextAlchemy"
 - `Escape` - Close floating formatter
 
 ## Context Menu

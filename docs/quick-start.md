@@ -29,8 +29,8 @@ TextAlchemy is designed to be simple and intuitive. Here's how to get started in
 - Click "Show More Styles" to see additional formatting options
 - Click "Show Less Styles" to return to the top 10 styles
 
-### Keyboard Shortcuts
-- Press `Ctrl/Cmd + Shift + F` on any webpage
+### Context Menu
+- Select text and right-click to choose "Open TextAlchemy"
 - A floating widget appears for quick formatting
 - Perfect for when you're browsing and want to format text quickly
 

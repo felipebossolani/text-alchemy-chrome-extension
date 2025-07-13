@@ -43,8 +43,7 @@ Simple popup interface with real-time preview. No sign-up required, works offlin
 🌐 Works Everywhere
 Perfect for social media posts, messages, emails, and anywhere you want your text to stand out.
 
-⌨️ Keyboard Shortcuts
-Use Ctrl/Cmd + Shift + F to open the formatter anywhere on any webpage.
+
 
 🎯 Context Menu
 Right-click selected text for quick formatting options.
@@ -68,7 +67,7 @@ Try it now and transform your text into something magical! ✨
 - **Icon**: Use `icon128.png` (already in your dist folder)
 - **Screenshots**: Create 3-5 screenshots showing:
   1. Popup interface with text styles
-  2. Keyboard shortcut floating widget
+  2. Context menu integration
   3. Context menu options
   4. Before/after text transformation examples
 
@@ -110,7 +109,7 @@ Create these screenshots for your listing:
 1. **Main Popup**: Show the popup with text input and style examples
 2. **Style Examples**: Display various text transformations
 3. **Context Menu**: Show right-click menu options
-4. **Keyboard Shortcut**: Demonstrate the floating widget
+4. **Context Menu**: Demonstrate the right-click functionality
 
 ### **Screenshot Guidelines**
 - **Size**: 1280x800px or 640x400px

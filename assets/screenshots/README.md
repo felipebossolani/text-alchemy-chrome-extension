@@ -8,7 +8,7 @@ This folder contains screenshots for the Chrome Web Store listing.
 1. **Main Popup** - Show the popup interface with text input and style examples
 2. **Style Examples** - Display various text transformations
 3. **Context Menu** - Show right-click menu options
-4. **Keyboard Shortcut** - Demonstrate the floating widget
+4. **Context Menu** - Demonstrate the right-click functionality
 5. **Before/After** - Show text transformation examples
 
 ### Technical Requirements
@@ -23,7 +23,7 @@ Use descriptive names for your screenshots:
 - `01-popup-interface.png`
 - `02-text-styles-examples.png`
 - `03-context-menu.png`
-- `04-keyboard-shortcut.png`
+- `04-context-menu.png`
 - `05-before-after-comparison.png`
 
 ## Tips for Great Screenshots

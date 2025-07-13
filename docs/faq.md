@@ -48,8 +48,8 @@ This happens on older systems or devices that don't support certain Unicode char
 - Try clicking the copy button again
 - Check if another extension is interfering with clipboard access
 
-### How do I use keyboard shortcuts?
-Press `Ctrl/Cmd + Shift + F` on any webpage to open the floating formatter widget.
+### How do I use the context menu?
+Select any text on a webpage, right-click, and choose "Open TextAlchemy" to open the formatter widget with your selected text pre-filled.
 
 ## Technical Questions
 

@@ -27,9 +27,9 @@ features:
   - icon: 🌐
     title: Works Everywhere
     details: Perfect for social media posts, messages, emails, and anywhere you want your text to stand out
-  - icon: ⌨️
-    title: Keyboard Shortcuts
-    details: Use Ctrl/Cmd + Shift + F to open the formatter anywhere on any webpage
+  - icon: 📋
+    title: Context Menu Integration
+    details: Right-click selected text and choose TextAlchemy for instant formatting
   - icon: 🎯
     title: Context Menu
     details: Right-click selected text for quick formatting options
@@ -47,8 +47,8 @@ features:
    - See real-time formatting in all styles
    - Click "Copy" next to any style you like
 
-3. **Use Keyboard Shortcuts**
-   - Press `Ctrl/Cmd + Shift + F` on any webpage
+3. **Use Context Menu**  
+- Select text and right-click to access TextAlchemy
    - A floating widget appears for quick formatting
 
 ## Popular Text Styles

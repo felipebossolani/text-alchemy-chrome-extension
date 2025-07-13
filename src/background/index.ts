@@ -74,7 +74,7 @@ class TextAlchemyBackground {
           autoSave: true,
           showNotifications: true,
           defaultStyles: 'top10',
-          keyboardShortcuts: true
+          contextMenu: true
         }
       });
 
@@ -428,7 +428,7 @@ class TextAlchemyBackground {
         autoSave: true,
         showNotifications: true,
         defaultStyles: 'top10',
-        keyboardShortcuts: true
+        contextMenu: true
       };
     } catch (error) {
       console.error('Error getting settings:', error);

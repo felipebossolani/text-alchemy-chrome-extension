@@ -30,7 +30,7 @@ O TextAlchemy foi projetado para ser simples e intuitivo. Aqui está como começ
 - Clique em "Mostrar Menos Estilos" para voltar aos 10 estilos principais
 
 ### Atalhos de Teclado
-- Pressione `Ctrl/Cmd + Shift + F` em qualquer página da web
+- Selecione texto e clique com o botão direito para escolher "Abrir TextAlchemy"
 - Um widget flutuante aparece para formatação rápida
 - Perfeito para quando você está navegando e quer formatar texto rapidamente
 

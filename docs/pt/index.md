@@ -29,7 +29,7 @@ features:
     details: Perfeito para posts de redes sociais, mensagens, emails e onde você quiser destacar seu texto
   - icon: ⌨️
     title: Atalhos de Teclado
-    details: Use Ctrl/Cmd + Shift + F para abrir o formatador em qualquer página da web
+    details: Clique com o botão direito em texto selecionado e escolha TextAlchemy para formatação instantânea
   - icon: 🎯
     title: Menu de Contexto
     details: Clique com o botão direito no texto selecionado para opções rápidas de formatação
@@ -48,7 +48,7 @@ features:
    - Clique em "Copiar" ao lado de qualquer estilo que você gostar
 
 3. **Use Atalhos de Teclado**
-   - Pressione `Ctrl/Cmd + Shift + F` em qualquer página da web
+   - Selecione texto e clique com o botão direito para acessar o TextAlchemy
    - Um widget flutuante aparece para formatação rápida
 
 ## Estilos de Texto Populares

@@ -8,7 +8,7 @@ Transform your plain text into magical Unicode styles! A modern Chrome extension
 - ⚡ **One-Click Copy** - Instantly copy any formatted text to your clipboard
 - 🔧 **Easy to Use** - Simple popup interface with real-time preview
 - 🌐 **Works Everywhere** - Perfect for social media, messages, emails
-- ⌨️ **Keyboard Shortcuts** - Use Ctrl/Cmd + Shift + F to open the formatter
+
 - 🎯 **Context Menu** - Right-click selected text for quick formatting
 
 ## Installation
@@ -168,8 +168,7 @@ Simple popup interface with real-time preview. No sign-up required, works offlin
 🌐 Works Everywhere
 Perfect for social media posts, messages, emails, and anywhere you want your text to stand out.
 
-⌨️ Keyboard Shortcuts
-Use Ctrl/Cmd + Shift + F to open the formatter anywhere on any webpage.
+
 
 🎯 Context Menu
 Right-click selected text for quick formatting options.
@@ -189,7 +188,7 @@ Try it now and transform your text into something magical! ✨
 - **Icon**: Use `icon128.png` from the dist folder
 - **Screenshots**: Create 3-5 screenshots showing:
   1. Popup interface with text styles
-  2. Keyboard shortcut floating widget
+  2. Context menu integration
   3. Context menu options
   4. Before/after text transformation examples
 
