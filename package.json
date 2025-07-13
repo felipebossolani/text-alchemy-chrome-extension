@@ -3,7 +3,7 @@
   "displayName": "TextAlchemy",
   "description": "Transform your text with magical Unicode styles - perfect for social media, messaging, and more",
   "private": true,
-  "version": "0.1.2",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
