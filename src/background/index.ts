@@ -252,20 +252,14 @@ class TextAlchemyBackground {
       const results = await chrome.scripting.executeScript({
         target: { tabId },
         func: async (textToTransform: string): Promise<TextTransformationResult> => {
-          console.log('TextAlchemy: Starting text transformation with:', textToTransform);
-          
           // First, check if the currently focused element is an input/textarea
           const activeElement = document.activeElement;
-          console.log('TextAlchemy: Active element:', activeElement);
           
           if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA')) {
-            console.log('TextAlchemy: Active element is input/textarea');
             const inputElement = activeElement as HTMLInputElement | HTMLTextAreaElement;
             const { selectionStart, selectionEnd } = inputElement;
             const start = selectionStart || 0;
             const end = selectionEnd || 0;
-            
-            console.log('TextAlchemy: Input selection range:', start, end);
             
             if (start !== end) {
               // Replace selected text
@@ -280,38 +274,27 @@ class TextAlchemyBackground {
               // Trigger input event for any listeners
               inputElement.dispatchEvent(new Event('input', { bubbles: true }));
               
-              console.log('TextAlchemy: Text replaced in active input field');
               return { success: true, isInputField: true };
-            } else {
-              console.log('TextAlchemy: No text selected in input field');
             }
           }
           
           // Fall back to selection-based approach for contentEditable elements
           const selection = window.getSelection();
           if (!selection || selection.rangeCount === 0) {
-            console.log('TextAlchemy: No selection found');
             return { success: false, isInputField: false, error: 'No selection found' };
           }
 
           const range = selection.getRangeAt(0);
           const commonAncestor = range.commonAncestorContainer;
           
-          console.log('TextAlchemy: Selection found, common ancestor:', commonAncestor);
-          
           // Find the target element for contentEditable
           let targetElement = commonAncestor.nodeType === Node.TEXT_NODE 
             ? commonAncestor.parentElement 
             : commonAncestor as Element;
           
-          console.log('TextAlchemy: Target element:', targetElement);
-          
           // Walk up the DOM to find contentEditable elements
           while (targetElement && targetElement !== document.body) {
-            console.log('TextAlchemy: Checking element:', targetElement.tagName, targetElement);
-            
             if ((targetElement as HTMLElement).contentEditable === 'true') {
-              console.log('TextAlchemy: Found contentEditable element');
               // Handle contentEditable elements
               if (range.toString()) {
                 range.deleteContents();
@@ -325,7 +308,6 @@ class TextAlchemyBackground {
                 selection.removeAllRanges();
                 selection.addRange(range);
                 
-                console.log('TextAlchemy: Text replaced in contentEditable');
                 return { success: true, isInputField: true };
               }
             }
@@ -333,7 +315,6 @@ class TextAlchemyBackground {
             targetElement = targetElement.parentElement;
           }
           
-          console.log('TextAlchemy: No input field found, copying to clipboard');
           // If we get here, it's not an input field - copy to clipboard
           try {
             // Ensure the window is focused first
@@ -356,26 +337,22 @@ class TextAlchemyBackground {
             try {
               // Use execCommand which is more reliable for extensions
               success = document.execCommand('copy');
-              console.log('TextAlchemy: execCommand copy result:', success);
               
               // If execCommand fails, try modern clipboard API as fallback
               if (!success && navigator.clipboard && window.isSecureContext) {
                 await navigator.clipboard.writeText(textToTransform);
                 success = true;
-                console.log('TextAlchemy: Modern clipboard API used');
               }
             } catch (err) {
-              console.error('TextAlchemy: Clipboard copy failed:', err);
+              console.error('Clipboard copy failed:', err);
               // Final fallback - try execCommand again
               success = document.execCommand('copy');
             } finally {
               document.body.removeChild(textarea);
             }
             
-            console.log('TextAlchemy: Clipboard copy final result:', success);
             return { success, isInputField: false };
           } catch (clipboardError) {
-            console.error('TextAlchemy: Clipboard error:', clipboardError);
             return { success: false, isInputField: false, error: clipboardError instanceof Error ? clipboardError.message : 'Unknown clipboard error' };
           }
         },
@@ -383,15 +360,12 @@ class TextAlchemyBackground {
       });
 
       const result = results[0]?.result;
-      console.log('TextAlchemy: Transformation result:', result);
       
       if (result?.success) {
         if (result.isInputField) {
           // Text was replaced in place - no notification needed
-          console.log('TextAlchemy: Text replaced in input field');
         } else {
           // Text was copied to clipboard - show notification
-          console.log('TextAlchemy: Text copied to clipboard, showing notification');
           this.showNotification(`Copied ${this.getStyleDisplayName(style)} text!`);
         }
       } else {
@@ -399,7 +373,7 @@ class TextAlchemyBackground {
       }
       
     } catch (error) {
-      console.error('TextAlchemy: Error handling text transformation:', error);
+      console.error('Error handling text transformation:', error);
       throw error;
     }
   }
