@@ -1,0 +1,100 @@
+<svg width="440" height="280" viewBox="0 0 440 280" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Beautiful gradient background -->
+    <linearGradient id="promoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1"/>
+      <stop offset="30%" style="stop-color:#7c3aed"/>
+      <stop offset="70%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#a855f7"/>
+    </linearGradient>
+    
+    <!-- Text background -->
+    <linearGradient id="textBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.15)"/>
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0.05)"/>
+    </linearGradient>
+    
+    <!-- Sparkle glow -->
+    <filter id="sparkleGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Text shadow -->
+    <filter id="textShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="rgba(0,0,0,0.3)"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="440" height="280" fill="url(#promoGrad)"/>
+  
+  <!-- Decorative background pattern -->
+  <g opacity="0.1" fill="white">
+    <circle cx="50" cy="50" r="30"/>
+    <circle cx="390" cy="60" r="25"/>
+    <circle cx="60" cy="220" r="20"/>
+    <circle cx="380" cy="220" r="35"/>
+  </g>
+  
+  <!-- Main content area -->
+  <rect x="20" y="20" width="400" height="240" fill="url(#textBg)" rx="16" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  
+  <!-- App icon (small version) -->
+  <g transform="translate(50, 50)">
+    <circle cx="0" cy="0" r="25" fill="rgba(255,255,255,0.9)"/>
+    <!-- Mini flask -->
+    <path d="M-10 -5 L10 -5 L8 5 L12 15 C12.5 16 11.5 17 10.5 17 L-10.5 17 C-11.5 17 -12.5 16 -12 15 L-8 5 Z" 
+          fill="#6366f1" stroke="white" stroke-width="1"/>
+    <text x="0" y="12" text-anchor="middle" fill="white" font-family="serif" font-size="8" font-weight="bold">A</text>
+  </g>
+  
+  <!-- Main title -->
+  <text x="100" y="65" fill="white" font-family="Arial, sans-serif" font-size="28" font-weight="bold" filter="url(#textShadow)">TextAlchemy</text>
+  
+  <!-- Subtitle -->
+  <text x="100" y="90" fill="rgba(255,255,255,0.9)" font-family="Arial, sans-serif" font-size="14" font-weight="500">Transform your text with magical Unicode styles</text>
+  
+  <!-- Feature highlights -->
+  <g font-family="Arial, sans-serif" font-size="12" fill="rgba(255,255,255,0.85)">
+    <text x="50" y="130">✨ 25+ beautiful text formatting styles</text>
+    <text x="50" y="150">🚀 Works on any website instantly</text>
+    <text x="50" y="170">📱 Perfect for social media posts</text>
+    <text x="50" y="190">⌨️ Keyboard shortcuts and right-click menu</text>
+  </g>
+  
+  <!-- Text transformation demo -->
+  <g transform="translate(280, 130)">
+    <!-- Demo box -->
+    <rect x="0" y="0" width="140" height="80" fill="rgba(255,255,255,0.1)" rx="8" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+    
+    <!-- Before text -->
+    <text x="70" y="25" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Arial, sans-serif" font-size="11">Regular text:</text>
+    <text x="70" y="40" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="normal">Hello World</text>
+    
+    <!-- Arrow -->
+    <path d="M70 45 L70 55 M67 52 L70 55 L73 52" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" fill="none"/>
+    
+    <!-- After text -->
+    <text x="70" y="70" text-anchor="middle" fill="white" font-family="serif" font-size="14" font-weight="bold">Hello World</text>
+  </g>
+  
+  <!-- Magical sparkles -->
+  <g filter="url(#sparkleGlow)" fill="rgba(255,255,255,0.8)">
+    <path d="M380 50 L385 55 M385 50 L380 55" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    <path d="M40 200 L45 205 M45 200 L40 205" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    <path d="M350 200 L355 205 M355 200 L350 205" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    
+    <circle cx="400" cy="80" r="2"/>
+    <circle cx="30" cy="120" r="1.5"/>
+    <circle cx="410" cy="180" r="1.5"/>
+  </g>
+  
+  <!-- Bottom text -->
+  <text x="220" y="250" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Arial, sans-serif" font-size="10" font-style="italic">
+    Copy any style with one click • Works everywhere • No sign-up required
+  </text>
+</svg>
