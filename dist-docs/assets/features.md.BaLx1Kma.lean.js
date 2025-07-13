@@ -1,1 +1,0 @@
-import{_ as a,c as t,o as s,ag as r}from"./chunks/framework.BI_O3LwE.js";const f=JSON.parse('{"title":"Features","description":"","frontmatter":{},"headers":[],"relativePath":"features.md","filePath":"features.md"}'),l={name:"features.md"};function o(i,e,n,c,h,u){return s(),t("div",null,e[0]||(e[0]=[r("",13)]))}const p=a(l,[["render",o]]);export{f as __pageData,p as default};
