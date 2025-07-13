@@ -32,15 +32,9 @@ export default defineManifest({
     48: 'icon48.png',
     128: 'icon128.png',
   },
-  permissions: ['activeTab', 'storage', 'contextMenus', 'notifications'],
-  content_scripts: [
-    {
-      js: isDev
-        ? ['src/content/index.dev.tsx']
-        : ['src/content/index.prod.tsx'],
-      matches: ['<all_urls>'],
-    },
-  ],
+  permissions: ['activeTab', 'storage', 'contextMenus', 'notifications', 'scripting'],
+  // Removed content_scripts to avoid "Broad Host Permissions" warning
+  // Scripts will be injected programmatically when needed
   web_accessible_resources: [
     {
       resources: ['*.js', '*.css', 'public/*'],

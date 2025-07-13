@@ -10,6 +10,8 @@ interface ExtensionMessage {
 }
 
 class TextAlchemyBackground {
+  private injectedTabs: Set<number> = new Set();
+  
   constructor() {
     this.init();
   }
@@ -33,6 +35,9 @@ class TextAlchemyBackground {
     
     // Context menu clicks
     chrome.contextMenus.onClicked.addListener(this.handleContextMenuClick.bind(this));
+    
+    // Tab removal (cleanup injected tabs)
+    chrome.tabs.onRemoved.addListener(this.handleTabRemoved.bind(this));
     
     // Startup
     chrome.runtime.onStartup.addListener(this.handleStartup.bind(this));
@@ -94,9 +99,19 @@ class TextAlchemyBackground {
     console.log('TextAlchemy: Extension started');
   }
 
+  // Handle tab removal
+  handleTabRemoved(tabId: number): void {
+    this.injectedTabs.delete(tabId);
+  }
+
   // Handle action (icon) click
   async handleActionClick(tab: chrome.tabs.Tab): Promise<void> {
     try {
+      // Ensure content script is injected before sending message
+      if (tab.id) {
+        await this.injectContentScript(tab.id);
+      }
+      
       // Send message to popup that it was opened
       chrome.runtime.sendMessage({ action: 'popupOpened', tabId: tab.id });
     } catch (error) {
@@ -188,6 +203,9 @@ class TextAlchemyBackground {
     const selectedText = info.selectionText || '';
     
     if (info.menuItemId === 'textalchemy-open-full') {
+      // Ensure content script is injected before sending message
+      await this.injectContentScript(tab.id);
+      
       // Send message to content script to open formatter
       try {
         await chrome.tabs.sendMessage(tab.id, {
@@ -209,6 +227,42 @@ class TextAlchemyBackground {
       } catch (error) {
         console.error('Error copying to clipboard:', error);
       }
+    }
+  }
+
+  // Inject content script programmatically
+  async injectContentScript(tabId: number): Promise<void> {
+    try {
+      // Check if already injected
+      if (this.injectedTabs.has(tabId)) {
+        return;
+      }
+
+      // Get tab info to check if injection is allowed
+      const tab = await chrome.tabs.get(tabId);
+      if (!tab.url || tab.url.startsWith('chrome://') || tab.url.startsWith('chrome-extension://')) {
+        console.log('Cannot inject content script in this tab');
+        return;
+      }
+
+      // Inject the content script
+      await chrome.scripting.executeScript({
+        target: { tabId },
+        files: ['content.js']
+      });
+
+      // Inject the content CSS
+      await chrome.scripting.insertCSS({
+        target: { tabId },
+        files: ['content.css']
+      });
+
+      // Mark as injected
+      this.injectedTabs.add(tabId);
+      
+      console.log('Content script injected successfully');
+    } catch (error) {
+      console.error('Error injecting content script:', error);
     }
   }
 
