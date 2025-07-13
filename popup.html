@@ -63,7 +63,7 @@
             const openInTab = useCallback(() => {
                 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
                     chrome.tabs.sendMessage(tabs[0].id, { 
-                        action: 'openFormatter',
+                        action: 'openTextFormatter',
                         text: inputText 
                     });
                     window.close();

@@ -223,7 +223,7 @@ class TextAlchemyBackground {
       // Send message to content script to open formatter
       try {
         await chrome.tabs.sendMessage(tab.id, {
-          action: 'openFormatter',
+          action: 'openTextFormatter',
           text: selectedText
         });
       } catch (error) {
