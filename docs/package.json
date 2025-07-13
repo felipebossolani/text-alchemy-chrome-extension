@@ -12,6 +12,6 @@
   "author": "Felipe Bossolani",
   "license": "MIT",
   "devDependencies": {
-    "vitepress": "^2.0.0"
+    "vitepress": "next"
   }
 }
