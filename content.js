@@ -75,10 +75,17 @@ function addCopyListeners() {
 }
 
 function removeFormatterWidget() {
+  // Remove the tracked widget
   if (formatterWidget) {
     formatterWidget.remove();
     formatterWidget = null;
   }
+  
+  // Also remove any orphaned widgets that might exist
+  const existingWidgets = document.querySelectorAll('#text-alchemy-widget');
+  existingWidgets.forEach(widget => widget.remove());
+  
+  console.log('TextAlchemy: All widgets removed from DOM');
 }
 
 function initializeWidget() {
@@ -186,6 +193,11 @@ function initializeWidget() {
 }
 
 function createFormatterWidget(initialText = '') {
+  console.log('TextAlchemy: Creating formatter widget with initial text:', initialText);
+  
+  // Always remove any existing widgets first
+  removeFormatterWidget();
+  
   // Create the widget container
   formatterWidget = document.createElement('div');
   formatterWidget.id = 'text-alchemy-widget';
@@ -236,28 +248,24 @@ function createFormatterWidget(initialText = '') {
 
   // Add to page
   document.body.appendChild(formatterWidget);
+  console.log('TextAlchemy: Widget added to DOM');
   
   // Initialize functionality
   initializeWidget();
+  console.log('TextAlchemy: Widget initialization complete');
 }
 
 // Listen for messages from background script
 chrome.runtime.onMessage.addListener((request) => {
+  console.log('TextAlchemy: Received message:', request);
   if (request.action === 'openTextFormatter') {
-    // Remove existing widget if any
-    removeFormatterWidget();
+    console.log('TextAlchemy: Opening formatter with text:', request.text);
     
-    // Create new widget with selected text
+    // Create new widget with selected text (removeFormatterWidget is called inside)
     createFormatterWidget(request.text || '');
+    console.log('TextAlchemy: Widget created successfully');
   }
 });
 
-// Wait for TextFormatter to be available before creating widget
-if (document.getElementById('tf-widget-container')) {
-  console.log('TextAlchemy widget already exists');
-} else {
-  // Wait a bit for TextFormatter to load, then create widget
-  setTimeout(() => {
-    createFormatterWidget();
-  }, 100);
-}
+// Content script is ready - widget will be created when requested via context menu
+console.log('TextAlchemy: Content script loaded and ready');

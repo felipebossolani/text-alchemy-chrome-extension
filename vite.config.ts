@@ -45,6 +45,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'src/popup/index.html'),
         options: resolve(__dirname, 'src/options/index.html'),
+        content: resolve(__dirname, 'src/content/index.prod.tsx'),
       },
       output: {
         assetFileNames: (assetInfo) => {
