@@ -1,0 +1,1 @@
+import{_ as a,c as t,o,ag as i}from"./chunks/framework.BI_O3LwE.js";const m=JSON.parse('{"title":"Frequently Asked Questions","description":"","frontmatter":{},"headers":[],"relativePath":"faq.md","filePath":"faq.md"}'),r={name:"faq.md"};function s(n,e,l,h,c,u){return o(),t("div",null,e[0]||(e[0]=[i("",69)]))}const p=a(r,[["render",s]]);export{m as __pageData,p as default};

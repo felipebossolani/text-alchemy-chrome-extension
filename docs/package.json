@@ -1,0 +1,17 @@
+{
+  "name": "text-alchemy-docs",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Documentation website for TextAlchemy Chrome Extension",
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "keywords": ["chrome-extension", "text-formatter", "unicode", "documentation"],
+  "author": "Felipe Bossolani",
+  "license": "MIT",
+  "devDependencies": {
+    "vitepress": "^2.0.0"
+  }
+}

@@ -1,172 +1,138 @@
-# TextAlchemy - Chrome Extension
+# TextAlchemy Chrome Extension
 
-Transform your plain text into magical Unicode styles! Perfect for social media posts, messages, and anywhere you want your text to stand out.
-
-## What is TextAlchemy?
-
-TextAlchemy is a powerful Chrome extension that transforms ordinary text into eye-catching Unicode styles. Whether you're posting on social media, writing messages, or creating content, TextAlchemy gives you 25+ unique text formatting options with just one click.
+Transform your plain text into magical Unicode styles! A modern Chrome extension built with React, TypeScript, and Vite.
 
 ## Features
 
-- **25+ Text Styles**: Bold, Italic, Cursive, Bubble, Upside Down, and many more
-- **Dual Mode**: Works as popup or floating widget on any webpage
-- **One-Click Copy**: Instantly copy any formatted text
-- **Keyboard Shortcut**: `Ctrl/Cmd + Shift + F` to open anywhere
-- **Real-Time Preview**: See formatting as you type
-- **No Sign-Up Required**: Works offline, no accounts needed
-- **Context Menu Integration**: Right-click selected text for quick formatting
+- 🎨 **25+ Text Styles** - Bold, Italic, Cursive, Bubble, Upside Down, and many more
+- ⚡ **One-Click Copy** - Instantly copy any formatted text to your clipboard
+- 🔧 **Easy to Use** - Simple popup interface with real-time preview
+- 🌐 **Works Everywhere** - Perfect for social media, messages, emails
+- ⌨️ **Keyboard Shortcuts** - Use Ctrl/Cmd + Shift + F to open the formatter
+- 🎯 **Context Menu** - Right-click selected text for quick formatting
 
-## Technology Stack
+## Installation
 
-- **Vite**: Lightning-fast development and hot module replacement
-- **TypeScript**: Type safety and enhanced productivity
-- **React 19**: Modern React with latest features
-- **CRX**: Easy packaging and distribution
-- **Tailwind CSS**: Utility-first CSS framework
-- **DaisyUI**: Beautiful and customizable UI components
+### Method 1: Chrome Web Store (Recommended)
+Coming soon! The extension will be available on the Chrome Web Store.
 
-## How to Use
+### Method 2: Manual Installation (Developer Mode)
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/felipebossolani/text-alchemy-chrome-extension.git
+   cd text-alchemy-chrome-extension
+   ```
 
-### Popup Mode
-1. Click the TextAlchemy icon in Chrome toolbar
-2. Type your text in the input field
-3. See real-time formatting in all styles
-4. Click "Copy" next to any style to copy to clipboard
-5. Click "Show More" to see additional formatting options
-6. Click "Open in Page" to switch to webpage mode
+2. Install dependencies:
+   ```bash
+   pnpm install
+   ```
 
-### Webpage Mode
-1. Use keyboard shortcut `Ctrl/Cmd + Shift + F` on any webpage
-2. OR click "Open in Page" from the popup
-3. A floating widget appears over the current page
-4. Type and format text as needed
-5. Click minimize (-) to collapse or close (×) to remove
-6. Use `Ctrl/Cmd + Shift + F` again to toggle off
+3. Build the extension:
+   ```bash
+   pnpm build:all
+   ```
 
-### Context Menu
-1. Select any text on a webpage
-2. Right-click and choose "TextAlchemy"
-3. Select a quick style or "Open TextAlchemy" for full options
-
-## Available Text Styles
-
-### Top 10 (Always Visible)
-1. **Bold** - 𝐁𝐨𝐥𝐝 𝐭𝐞𝐱𝐭
-2. **Italic** - 𝐼𝑡𝑎𝑙𝑖𝑐 𝑡𝑒𝑥𝑡  
-3. **Cursive** - 𝒞𝓊𝓇𝓈𝒾𝓋ℯ 𝓉ℯ𝓍𝓉
-4. **Strikethrough** - S̶t̶r̶i̶k̶e̶t̶h̶r̶o̶u̶g̶h̶
-5. **Monospace** - 𝙼𝚘𝚗𝚘𝚜𝚙𝚊𝚌𝚎
-6. **Bubble Text** - Ⓑⓤⓑⓑⓛⓔ ⓣⓔⓧⓣ
-7. **Square Text** - 🅂🅀🅄🄰🅁🄴 🅃🄴🅇🅃
-8. **Upside Down** - ʇxǝʇ uʍop ǝpᴉsd∩
-9. **Small Caps** - sᴍᴀʟʟ ᴄᴀᴘs
-10. **Tiny Text** - ᵗⁱⁿʸ ᵗᵉˣᵗ
-
-### Additional Styles (Show More)
-- **Fraktur** - 𝔉𝔯𝔞𝔨𝔱𝔲𝔯
-- **Double Struck** - 𝔻𝕠𝕦𝕓𝕝𝕖 𝕊𝕥𝕣𝕦𝕔𝕜
-- **Underline** - U̲n̲d̲e̲r̲l̲i̲n̲e̲
-- **Slashthrough** - S̸l̸a̸s̸h̸t̸h̸r̸o̸u̸g̸h̸
-- **Sans Serif** - 𝖲𝖺𝗇𝗌 𝖲𝖾𝗋𝗂𝖿
-- **Fullwidth** - Ｆｕｌｌｗｉｄｔｈ
-- **Squiggles** - Ѕզմìցցӏҽʂ
-- **Hearts** - H♡e♡a♡r♡t♡s♡
-- **Lightning** - L⚡i⚡g⚡h⚡t⚡n⚡i⚡n⚡g⚡
-- **Diamonds** - D💎i💎a💎m💎o💎n💎d💎s💎
-- **Clapback** - Clap 👏 back 👏 text
-- **Air Quotes** - "Air quotes"
-- **Ransom Note** - rAnSoM nOtE
+4. Load in Chrome:
+   - Open Chrome and go to `chrome://extensions/`
+   - Enable "Developer mode" (toggle in top right)
+   - Click "Load unpacked"
+   - Select the `dist` folder from the project
 
 ## Development
 
 ### Prerequisites
-- Node.js >= 20.x
-- pnpm >= 8.15.0
+- Node.js 20+
+- pnpm (recommended) or npm
 
 ### Setup
-1. Clone the repository
-2. Install dependencies: `pnpm install`
-3. Start development: `pnpm dev`
-4. Build for production: `pnpm build:all`
-
-### Load Extension
-1. Open Chrome and go to `chrome://extensions/`
-2. Enable "Developer mode" (top right toggle)
-3. Click "Load unpacked"
-4. Select the `dist` folder after building
-5. The extension should now appear in your toolbar
-
-## Installation
-
-### Method 1: Download from GitHub
-1. Go to the [Releases page](../../releases) 
-2. Download the latest `text-alchemy-extension.zip`
-3. Extract the zip file
-4. Follow the "Load as Unpacked Extension" steps above
-
-### Method 2: Build from Source
 ```bash
-git clone https://github.com/YOUR_USERNAME/text-alchemy-chrome-extension.git
-cd text-alchemy-chrome-extension
+# Install dependencies
 pnpm install
+
+# Start development server
+pnpm dev
+
+# Build for production
 pnpm build:all
 ```
 
-### Build for Production
+### Build Scripts
+- `pnpm dev` - Start development server
+- `pnpm build` - Build extension only
+- `pnpm build:all` - Build extension and popup CSS
+- `pnpm build:website` - Build documentation website
+- `pnpm build:everything` - Build extension and website
 
-To build the extension (including all popup styles), run:
+## Website
 
-```sh
-pnpm build:all
+The project includes a documentation website built with VitePress, available in both English and Portuguese.
+
+### Website Development
+```bash
+# Start website development server
+pnpm docs:dev
+
+# Build website for production
+pnpm docs:build
+
+# Preview built website
+pnpm docs:preview
 ```
 
-This will:
-- Build the extension with Vite
-- Generate the popup CSS with all Tailwind/DaisyUI styles for the popup
+### Website Features
+- 🌍 **Multi-language** - English and Portuguese support
+- 🎨 **Consistent Theme** - Same purple theme as the extension
+- 📱 **Responsive Design** - Works on all devices
+- 🔍 **Search** - Find information quickly
+- 📚 **Comprehensive Docs** - Installation, usage, FAQ, and more
 
-Then, load the `dist` folder in Chrome as your unpacked extension.
+### Deployment
+The website is configured for GitHub Pages deployment. The built files are in the `dist-docs` folder and should be deployed from the `docs` folder in your repository settings.
 
-## Technical Details
+## Project Structure
 
-- **Framework**: React 19 + TypeScript + Tailwind CSS
-- **Manifest Version**: 3 (latest Chrome extension format)
-- **Permissions**: `activeTab`, `storage`, `contextMenus`, `notifications`
-- **Unicode**: Uses Mathematical Alphanumeric Symbols and other Unicode blocks
-- **Compatibility**: Works on all websites, no external dependencies
-- **Storage**: Settings sync across devices, usage stats stored locally
-
-## Troubleshooting
-
-### Extension Not Loading
-- Ensure all files are in the correct folder structure
-- Check that manifest.json is valid JSON
-- Verify Developer mode is enabled in Chrome extensions
-
-### Styles Not Working
-- Some Unicode characters may not display on all devices/browsers
-- Older systems might show replacement characters (□ or ?)
-- This is normal behavior for Unicode text formatting
-
-### Keyboard Shortcut Not Working
-- Make sure you're pressing Ctrl/Cmd + Shift + F (not just Ctrl + F)
-- Try refreshing the page if the content script didn't load
-- Check if another extension is using the same shortcut
-
-### Copy Function Issues
-- Modern browsers require HTTPS for clipboard API
-- Extension falls back to legacy copy method automatically
-- Try clicking copy again if it doesn't work the first time
+```
+text-alchemy-chrome-extension/
+├── src/                    # Extension source code
+│   ├── background/         # Background scripts
+│   ├── content/           # Content scripts
+│   ├── popup/             # Popup interface
+│   └── manifest.ts        # Extension manifest
+├── docs/                  # Documentation website
+│   ├── .vitepress/        # VitePress configuration
+│   ├── public/            # Static assets
+│   ├── index.md           # English homepage
+│   └── pt/                # Portuguese pages
+├── dist/                  # Built extension
+├── dist-docs/             # Built website
+└── public/                # Extension icons
+```
 
 ## Contributing
 
-We welcome contributions to improve TextAlchemy! Whether you'd like to:
-- Fix a bug
-- Add new text styles
-- Improve the UI/UX
-- Enhance documentation
-
-Your contributions are highly valued!
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
 
-This extension is provided as-is for educational and personal use. The Unicode transformations are based on standard Unicode character mappings.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Author
+
+**Felipe Bossolani**
+- GitHub: [@felipebossolani](https://github.com/felipebossolani)
+- LinkedIn: [Felipe Bossolani](https://www.linkedin.com/in/felipebossolani/)
+
+## Support
+
+- 📖 [Documentation](https://felipebossolani.github.io/text-alchemy-chrome-extension/)
+- 🐛 [Report Issues](https://github.com/felipebossolani/text-alchemy-chrome-extension/issues)
+- 💡 [Feature Requests](https://github.com/felipebossolani/text-alchemy-chrome-extension/issues)
+
+---
+
+Made with ❤️ by Felipe Bossolani

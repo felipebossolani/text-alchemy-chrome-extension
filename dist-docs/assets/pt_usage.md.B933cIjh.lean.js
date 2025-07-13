@@ -1,0 +1,1 @@
+import{_ as e,c as o,o as t,ag as r}from"./chunks/framework.BI_O3LwE.js";const m=JSON.parse('{"title":"Guia de Uso","description":"","frontmatter":{},"headers":[],"relativePath":"pt/usage.md","filePath":"pt/usage.md"}'),s={name:"pt/usage.md"};function d(i,a,l,c,n,u){return t(),o("div",null,a[0]||(a[0]=[r("",10)]))}const p=e(s,[["render",d]]);export{m as __pageData,p as default};
