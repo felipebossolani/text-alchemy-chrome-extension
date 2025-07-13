@@ -194,6 +194,7 @@
   flex: 1;
   overflow-y: auto;
   padding-bottom: 8px;
+  max-height: 280px; /* Fixed max height to prevent modal growth */
 }
 
 .tf-results,
@@ -201,7 +202,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  min-height: 200px;
+  /* Removed min-height to allow natural sizing with scroll */
 }
 
 .tf-empty-state {
@@ -209,7 +210,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 128px;
+  height: 200px; /* Increased to better fill the fixed container height */
   color: #9ca3af;
   text-align: center;
 }
@@ -318,21 +319,21 @@
   margin-top: 12px;
 }
 
-/* Scrollbar styling */
-.tf-results-section::-webkit-scrollbar {
+/* Scrollbar styling for results container */
+.tf-results-container::-webkit-scrollbar {
   width: 6px;
 }
 
-.tf-results-section::-webkit-scrollbar-track {
+.tf-results-container::-webkit-scrollbar-track {
   background: #f1f5f9;
 }
 
-.tf-results-section::-webkit-scrollbar-thumb {
+.tf-results-container::-webkit-scrollbar-thumb {
   background: #cbd5e1;
   border-radius: 3px;
 }
 
-.tf-results-section::-webkit-scrollbar-thumb:hover {
+.tf-results-container::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
 
@@ -355,7 +356,11 @@
     padding: 16px;
   }
   
-  .tf-results-section {
-    padding: 0 16px 16px;
+  .tf-styles-section {
+    padding: 0 16px 8px 16px;
+  }
+  
+  .tf-results-container {
+    max-height: 200px; /* Smaller max height for mobile screens */
   }
 }
