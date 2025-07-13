@@ -164,13 +164,20 @@ class TextAlchemyBackground {
         contexts: ['selection']
       });
 
-      // Create submenu for quick styles
-      const quickStyles = ['bold', 'italic', 'cursive', 'strikethrough', 'bubble'];
+      // Create submenu for quick styles (matching the screenshot)
+      const quickStyles = [
+        { id: 'bold', name: 'Bold' },
+        { id: 'italic', name: 'Italic' },
+        { id: 'cursive', name: 'Cursive' },
+        { id: 'strikethrough', name: 'Strikethrough' },
+        { id: 'bubble', name: 'Bubble Text' }
+      ];
+      
       quickStyles.forEach(style => {
         chrome.contextMenus.create({
-          id: `textalchemy-${style}`,
+          id: `textalchemy-${style.id}`,
           parentId: 'textalchemy-main',
-          title: this.getStyleDisplayName(style),
+          title: style.name,
           contexts: ['selection']
         });
       });
@@ -222,10 +229,12 @@ class TextAlchemyBackground {
       
       // Copy to clipboard
       try {
-        await this.copyToClipboard(formattedText);
+        await this.copyToClipboard(formattedText, tab.id);
         this.showNotification(`Copied ${this.getStyleDisplayName(style)} text!`);
       } catch (error) {
         console.error('Error copying to clipboard:', error);
+        // Still show notification even if copy fails
+        this.showNotification(`Failed to copy ${this.getStyleDisplayName(style)} text`);
       }
     }
   }
@@ -331,20 +340,62 @@ class TextAlchemyBackground {
   }
 
   // Copy to clipboard
-  async copyToClipboard(text: string): Promise<void> {
-    // Note: Background scripts can't directly access clipboard
-    // This would need to be handled by content scripts
-    console.log('Copy to clipboard requested:', text);
+  async copyToClipboard(text: string, tabId?: number): Promise<void> {
+    try {
+      if (tabId) {
+        // Use chrome.scripting to execute clipboard copy in the active tab
+        await chrome.scripting.executeScript({
+          target: { tabId },
+          func: (textToCopy: string) => {
+            // Create a temporary textarea element to copy text
+            const textarea = document.createElement('textarea');
+            textarea.value = textToCopy;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            textarea.setSelectionRange(0, 99999); // For mobile devices
+            
+            try {
+              // Try modern clipboard API first
+              if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(textToCopy);
+              } else {
+                // Fallback to execCommand
+                document.execCommand('copy');
+              }
+            } catch (err) {
+              console.error('Clipboard copy failed:', err);
+              // Fallback to execCommand
+              document.execCommand('copy');
+            } finally {
+              document.body.removeChild(textarea);
+            }
+          },
+          args: [text]
+        });
+        console.log('Text copied to clipboard successfully');
+      }
+    } catch (error) {
+      console.error('Error copying to clipboard:', error);
+      throw error;
+    }
   }
 
   // Show notification
   showNotification(message: string, type: 'basic' | 'image' | 'list' | 'progress' = 'basic'): void {
-    chrome.notifications.create({
+    const notificationId = `textalchemy-${Date.now()}`;
+    chrome.notifications.create(notificationId, {
       type,
       iconUrl: 'icon48.png',
       title: 'TextAlchemy',
       message
     });
+    
+    // Auto-clear notification after 3 seconds
+    setTimeout(() => {
+      chrome.notifications.clear(notificationId);
+    }, 3000);
   }
 
   // Get style display name
