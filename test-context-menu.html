@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TextAlchemy Context Menu Test</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        
+        .test-section h2 {
+            color: #333;
+            margin-top: 0;
+            border-bottom: 2px solid #007acc;
+            padding-bottom: 10px;
+        }
+        
+        .instruction {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-left: 4px solid #007acc;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .sample-text {
+            background-color: #fff;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: inherit;
+            margin: 10px 0;
+        }
+        
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #007acc;
+        }
+        
+        .expected-behavior {
+            background-color: #e8f8e8;
+            padding: 12px;
+            border-left: 4px solid #28a745;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .expected-behavior strong {
+            color: #28a745;
+        }
+        
+        .warning {
+            background-color: #fff3cd;
+            padding: 12px;
+            border-left: 4px solid #ffc107;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .contenteditable-div {
+            border: 2px solid #ddd;
+            padding: 12px;
+            min-height: 80px;
+            background-color: #fff;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        
+        .contenteditable-div:focus {
+            outline: none;
+            border-color: #007acc;
+        }
+        
+        h1 {
+            color: #007acc;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .step {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .step::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #007acc;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 TextAlchemy Context Menu Test</h1>
+    
+    <div class="test-section">
+        <h2>📝 Test 1: Input Fields (Direct Text Replacement)</h2>
+        <div class="instruction">
+            <strong>Expected Behavior:</strong> Text should be replaced directly in the input field, NO notification should appear.
+        </div>
+        
+        <label for="test-input"><strong>Text Input:</strong></label>
+        <input type="text" id="test-input" placeholder="Type some text here, select it, then right-click and choose a style">
+        
+        <label for="test-textarea"><strong>Textarea:</strong></label>
+        <textarea id="test-textarea" placeholder="Type some text here, select it, then right-click and choose a style"></textarea>
+        
+        <div class="expected-behavior">
+            <strong>✅ Success:</strong> Selected text gets replaced with formatted version directly in the field
+        </div>
+        
+        <div class="step">Select some text in the input or textarea above</div>
+        <div class="step">Right-click the selected text</div>
+        <div class="step">Choose any TextAlchemy style (Bold, Italic, Cursive, etc.)</div>
+        <div class="step">Text should be replaced in place - no notification</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>📝 Test 2: ContentEditable Elements (Direct Text Replacement)</h2>
+        <div class="instruction">
+            <strong>Expected Behavior:</strong> Text should be replaced directly in the contenteditable element, NO notification should appear.
+        </div>
+        
+        <label><strong>ContentEditable Div:</strong></label>
+        <div class="contenteditable-div" contenteditable="true">
+            This is a contenteditable div. You can edit this text directly. Select some text, right-click, and choose a TextAlchemy style to see it transform in place.
+        </div>
+        
+        <div class="expected-behavior">
+            <strong>✅ Success:</strong> Selected text gets replaced with formatted version directly in the contenteditable element
+        </div>
+        
+        <div class="step">Select some text in the contenteditable div above</div>
+        <div class="step">Right-click the selected text</div>
+        <div class="step">Choose any TextAlchemy style</div>
+        <div class="step">Text should be replaced in place - no notification</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>📋 Test 3: Regular Text (Clipboard Copy)</h2>
+        <div class="instruction">
+            <strong>Expected Behavior:</strong> Text should be copied to clipboard AND a notification should appear and disappear after 3 seconds.
+        </div>
+        
+        <div class="sample-text">
+            This is regular text in a paragraph. When you select this text and use TextAlchemy context menu, it should be copied to your clipboard and you should see a notification.
+        </div>
+        
+        <div class="sample-text">
+            Here's another paragraph with different text. Try selecting text from different parts of this page to test the clipboard functionality.
+        </div>
+        
+        <div class="expected-behavior">
+            <strong>✅ Success:</strong> Text gets copied to clipboard + notification appears and disappears after 3 seconds
+        </div>
+        
+        <div class="step">Select some text in the paragraphs above</div>
+        <div class="step">Right-click the selected text</div>
+        <div class="step">Choose any TextAlchemy style</div>
+        <div class="step">You should see a notification appear</div>
+        <div class="step">Paste (Ctrl+V) somewhere to verify it was copied</div>
+        <div class="step">Notification should disappear after 3 seconds</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>🚀 Test 4: Open Full TextAlchemy</h2>
+        <div class="instruction">
+            <strong>Test the "Open TextAlchemy" option in the context menu.</strong>
+        </div>
+        
+        <div class="sample-text">
+            Select this text, right-click, and choose "Open TextAlchemy" from the context menu. This should open the full TextAlchemy interface with your selected text pre-filled.
+        </div>
+        
+        <div class="expected-behavior">
+            <strong>✅ Success:</strong> TextAlchemy popup/interface opens with selected text pre-filled
+        </div>
+    </div>
+    
+    <div class="warning">
+        <strong>⚠️ Important:</strong> Make sure to reload the extension in Chrome after building:
+        <br>1. Go to chrome://extensions/
+        <br>2. Find TextAlchemy extension
+        <br>3. Click the refresh button
+        <br>4. Then test the functionality
+    </div>
+    
+    <div class="test-section">
+        <h2>🐛 Debugging Tips</h2>
+        <div class="instruction">
+            If something doesn't work as expected:
+        </div>
+        
+        <div class="step">Press F12 to open Developer Tools</div>
+        <div class="step">Check the Console tab for any error messages</div>
+        <div class="step">Look for background script errors in chrome://extensions/</div>
+        <div class="step">Try the functionality on different websites to ensure it works universally</div>
+    </div>
+</body>
+</html> 

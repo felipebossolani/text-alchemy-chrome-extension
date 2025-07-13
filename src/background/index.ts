@@ -3,10 +3,16 @@ import { textFormatter } from '@utils/textFormatter';
 
 interface ExtensionMessage {
   action: string;
-  data?: any;
+  data?: unknown;
   text?: string;
   style?: string;
-  settings?: any;
+  settings?: Record<string, unknown>;
+}
+
+interface TextTransformationResult {
+  success: boolean;
+  isInputField: boolean;
+  error?: string;
 }
 
 class TextAlchemyBackground {
@@ -120,7 +126,7 @@ class TextAlchemyBackground {
   }
 
   // Handle messages from content scripts and popup
-  handleMessage(request: ExtensionMessage, _sender: chrome.runtime.MessageSender, sendResponse: (response?: any) => void): boolean | void {
+  handleMessage(request: ExtensionMessage, _sender: chrome.runtime.MessageSender, sendResponse: (response?: unknown) => void): boolean | void {
     switch (request.action) {
       case 'getSettings':
         this.getSettings().then(sendResponse);
@@ -140,14 +146,15 @@ class TextAlchemyBackground {
 
       case 'trackUsage':
         this.trackUsage(request.data);
-        break;
+        return false;
 
       case 'openOptionsPage':
         chrome.runtime.openOptionsPage();
-        break;
+        return false;
 
       default:
         console.log('Unknown message action:', request.action);
+        return false;
     }
   }
 
@@ -227,15 +234,173 @@ class TextAlchemyBackground {
       const style = info.menuItemId.replace('textalchemy-', '');
       const formattedText = textFormatter.format(selectedText, style);
       
-      // Copy to clipboard
+      // Handle text replacement or clipboard copy based on context
       try {
-        await this.copyToClipboard(formattedText, tab.id);
-        this.showNotification(`Copied ${this.getStyleDisplayName(style)} text!`);
+        await this.handleTextTransformation(formattedText, style, tab.id);
       } catch (error) {
-        console.error('Error copying to clipboard:', error);
-        // Still show notification even if copy fails
-        this.showNotification(`Failed to copy ${this.getStyleDisplayName(style)} text`);
+        console.error('Error handling text transformation:', error);
+        // Still show notification even if transformation fails
+        this.showNotification(`Failed to transform ${this.getStyleDisplayName(style)} text`);
       }
+    }
+  }
+
+  // Handle text transformation - either replace in place or copy to clipboard
+  async handleTextTransformation(formattedText: string, style: string, tabId: number): Promise<void> {
+    try {
+      // Inject script to detect selection context and handle transformation
+      const results = await chrome.scripting.executeScript({
+        target: { tabId },
+        func: async (textToTransform: string): Promise<TextTransformationResult> => {
+          console.log('TextAlchemy: Starting text transformation with:', textToTransform);
+          
+          // First, check if the currently focused element is an input/textarea
+          const activeElement = document.activeElement;
+          console.log('TextAlchemy: Active element:', activeElement);
+          
+          if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA')) {
+            console.log('TextAlchemy: Active element is input/textarea');
+            const inputElement = activeElement as HTMLInputElement | HTMLTextAreaElement;
+            const { selectionStart, selectionEnd } = inputElement;
+            const start = selectionStart || 0;
+            const end = selectionEnd || 0;
+            
+            console.log('TextAlchemy: Input selection range:', start, end);
+            
+            if (start !== end) {
+              // Replace selected text
+              const currentValue = inputElement.value;
+              const newValue = currentValue.substring(0, start) + textToTransform + currentValue.substring(end);
+              inputElement.value = newValue;
+              
+              // Set cursor position after the transformed text
+              const newCursorPos = start + textToTransform.length;
+              inputElement.setSelectionRange(newCursorPos, newCursorPos);
+              
+              // Trigger input event for any listeners
+              inputElement.dispatchEvent(new Event('input', { bubbles: true }));
+              
+              console.log('TextAlchemy: Text replaced in active input field');
+              return { success: true, isInputField: true };
+            } else {
+              console.log('TextAlchemy: No text selected in input field');
+            }
+          }
+          
+          // Fall back to selection-based approach for contentEditable elements
+          const selection = window.getSelection();
+          if (!selection || selection.rangeCount === 0) {
+            console.log('TextAlchemy: No selection found');
+            return { success: false, isInputField: false, error: 'No selection found' };
+          }
+
+          const range = selection.getRangeAt(0);
+          const commonAncestor = range.commonAncestorContainer;
+          
+          console.log('TextAlchemy: Selection found, common ancestor:', commonAncestor);
+          
+          // Find the target element for contentEditable
+          let targetElement = commonAncestor.nodeType === Node.TEXT_NODE 
+            ? commonAncestor.parentElement 
+            : commonAncestor as Element;
+          
+          console.log('TextAlchemy: Target element:', targetElement);
+          
+          // Walk up the DOM to find contentEditable elements
+          while (targetElement && targetElement !== document.body) {
+            console.log('TextAlchemy: Checking element:', targetElement.tagName, targetElement);
+            
+            if ((targetElement as HTMLElement).contentEditable === 'true') {
+              console.log('TextAlchemy: Found contentEditable element');
+              // Handle contentEditable elements
+              if (range.toString()) {
+                range.deleteContents();
+                const textNode = document.createTextNode(textToTransform);
+                range.insertNode(textNode);
+                
+                // Move cursor to end of inserted text (collapse to single point)
+                range.setStartAfter(textNode);
+                range.setEndAfter(textNode);
+                range.collapse(true); // Collapse to start position (cursor, not selection)
+                selection.removeAllRanges();
+                selection.addRange(range);
+                
+                console.log('TextAlchemy: Text replaced in contentEditable');
+                return { success: true, isInputField: true };
+              }
+            }
+            
+            targetElement = targetElement.parentElement;
+          }
+          
+          console.log('TextAlchemy: No input field found, copying to clipboard');
+          // If we get here, it's not an input field - copy to clipboard
+          try {
+            // Ensure the window is focused first
+            window.focus();
+            
+            // Create a temporary textarea element to copy text
+            const textarea = document.createElement('textarea');
+            textarea.value = textToTransform;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            textarea.style.left = '-999px';
+            textarea.style.top = '-999px';
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            textarea.setSelectionRange(0, 99999); // For mobile devices
+            
+            let success = false;
+            
+            try {
+              // Use execCommand which is more reliable for extensions
+              success = document.execCommand('copy');
+              console.log('TextAlchemy: execCommand copy result:', success);
+              
+              // If execCommand fails, try modern clipboard API as fallback
+              if (!success && navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(textToTransform);
+                success = true;
+                console.log('TextAlchemy: Modern clipboard API used');
+              }
+            } catch (err) {
+              console.error('TextAlchemy: Clipboard copy failed:', err);
+              // Final fallback - try execCommand again
+              success = document.execCommand('copy');
+            } finally {
+              document.body.removeChild(textarea);
+            }
+            
+            console.log('TextAlchemy: Clipboard copy final result:', success);
+            return { success, isInputField: false };
+          } catch (clipboardError) {
+            console.error('TextAlchemy: Clipboard error:', clipboardError);
+            return { success: false, isInputField: false, error: clipboardError instanceof Error ? clipboardError.message : 'Unknown clipboard error' };
+          }
+        },
+        args: [formattedText]
+      });
+
+      const result = results[0]?.result;
+      console.log('TextAlchemy: Transformation result:', result);
+      
+      if (result?.success) {
+        if (result.isInputField) {
+          // Text was replaced in place - no notification needed
+          console.log('TextAlchemy: Text replaced in input field');
+        } else {
+          // Text was copied to clipboard - show notification
+          console.log('TextAlchemy: Text copied to clipboard, showing notification');
+          this.showNotification(`Copied ${this.getStyleDisplayName(style)} text!`);
+        }
+      } else {
+        throw new Error(result?.error || 'Unknown error');
+      }
+      
+    } catch (error) {
+      console.error('TextAlchemy: Error handling text transformation:', error);
+      throw error;
     }
   }
 
@@ -254,7 +419,13 @@ class TextAlchemyBackground {
         return;
       }
 
-      // Inject the content script
+      // Inject the textFormatter first (required by content script)
+      await chrome.scripting.executeScript({
+        target: { tabId },
+        files: ['textFormatter.js']
+      });
+
+      // Then inject the content script
       await chrome.scripting.executeScript({
         target: { tabId },
         files: ['content.js']
@@ -276,7 +447,7 @@ class TextAlchemyBackground {
   }
 
   // Get settings
-  async getSettings(): Promise<any> {
+  async getSettings(): Promise<Record<string, unknown>> {
     try {
       const result = await chrome.storage.sync.get(['settings']);
       return result.settings || {
@@ -292,7 +463,7 @@ class TextAlchemyBackground {
   }
 
   // Save settings
-  async saveSettings(settings: any): Promise<{ success: boolean; error?: string }> {
+  async saveSettings(settings: Record<string, unknown> | undefined): Promise<{ success: boolean; error?: string }> {
     try {
       await chrome.storage.sync.set({ settings });
       return { success: true };
