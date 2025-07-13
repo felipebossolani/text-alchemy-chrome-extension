@@ -17,7 +17,16 @@ export default defineConfig({
       lang: 'pt',
       title: 'TextAlchemy',
       description: 'Transforme seu texto simples em estilos Unicode mágicos!',
-      link: '/pt/'
+      link: '/pt/',
+      themeConfig: {
+        nav: [
+          { text: 'Início', link: '/pt/' },
+          { text: 'Instalação', link: '/pt/installation' },
+          { text: 'Recursos', link: '/pt/features' },
+          { text: 'Privacidade', link: '/pt/privacy' },
+          { text: 'GitHub', link: 'https://github.com/felipebossolani/text-alchemy-chrome-extension' }
+        ]
+      }
     }
   },
 
@@ -34,6 +43,7 @@ export default defineConfig({
       { text: 'Home', link: '/' },
       { text: 'Installation', link: '/installation' },
       { text: 'Features', link: '/features' },
+      { text: 'Privacy', link: '/privacy' },
       { text: 'GitHub', link: 'https://github.com/felipebossolani/text-alchemy-chrome-extension' }
     ],
 
@@ -62,6 +72,13 @@ export default defineConfig({
             { text: 'Contributing', link: '/contributing' },
             { text: 'API Reference', link: '/api' }
           ]
+        },
+        {
+          text: 'Legal',
+          items: [
+            { text: 'Privacy Policy', link: '/privacy' },
+            { text: 'FAQ', link: '/faq' }
+          ]
         }
       ],
       '/pt/': [
@@ -86,6 +103,13 @@ export default defineConfig({
           items: [
             { text: 'Contribuindo', link: '/pt/contributing' },
             { text: 'Referência da API', link: '/pt/api' }
+          ]
+        },
+        {
+          text: 'Legal',
+          items: [
+            { text: 'Política de Privacidade', link: '/pt/privacy' },
+            { text: 'FAQ', link: '/pt/faq' }
           ]
         }
       ]
