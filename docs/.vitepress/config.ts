@@ -115,7 +115,8 @@ export default defineConfig({
   // Head configuration
   head: [
     ['link', { rel: 'icon', href: '/icon48.png' }],
-    ['meta', { name: 'theme-color', content: '#6C3EF4' }]
+    ['meta', { name: 'theme-color', content: '#6C3EF4' }],
+    ['meta', { name: 'google-site-verification', content: 'l_j6zqukjZdEe8L5S_5gg-LWjSBTooxS5xUNEEmXi-I' }]
   ],
 
   // Build configuration
