@@ -8,8 +8,20 @@ Transform your plain text into magical Unicode styles! A modern Chrome extension
 - ⚡ **One-Click Copy** - Instantly copy any formatted text to your clipboard
 - 🔧 **Easy to Use** - Simple popup interface with real-time preview
 - 🌐 **Works Everywhere** - Perfect for social media, messages, emails
-
 - 🎯 **Context Menu** - Right-click selected text for quick formatting
+
+## Tech Stack
+
+This project was built using modern web technologies and tools:
+
+- **React 19** - Modern UI library with hooks
+- **TypeScript** - Type safety and better development experience
+- **Vite** - Fast build tool and development server
+- **[chrome-ext-starter](https://github.com/rezasohrabi/chrome-ext-starter)** - Chrome Extension development boilerplate with React, TypeScript, Vite, and Tailwind CSS
+- **@crxjs/vite-plugin** - Chrome Extension Vite plugin for seamless development
+- **Tailwind CSS + DaisyUI** - Utility-first CSS framework with beautiful UI components
+- **Chrome Extension APIs** - Native browser integration
+- **VitePress** - Documentation website generator
 
 ## Installation
 
