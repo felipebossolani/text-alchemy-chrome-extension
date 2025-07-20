@@ -285,7 +285,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Support
 
-- 📖 [Documentation](https://felipebossolani.github.io/text-alchemy-chrome-extension/)
+- 📖 [Documentation](https://textalchemy.cc)
 - 🐛 [Report Issues](https://github.com/felipebossolani/text-alchemy-chrome-extension/issues)
 - 💡 [Feature Requests](https://github.com/felipebossolani/text-alchemy-chrome-extension/issues)
 

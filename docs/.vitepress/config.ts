@@ -146,6 +146,6 @@ export default defineConfig({
   // Build configuration
   outDir: '../dist-docs',
   
-  // Base URL for GitHub Pages
-  base: '/text-alchemy-chrome-extension/'
+  // Base URL - empty for custom domain
+  base: '/'
 }) 
