@@ -145,6 +145,24 @@ export default defineConfig({
     ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }],
     ['link', { rel: 'manifest', href: '/site.webmanifest' }],
     
+    // Open Graph / Social Media Sharing
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:title', content: 'TextAlchemy - Transform Text into Magical Unicode Styles' }],
+    ['meta', { property: 'og:description', content: 'Transform your plain text into beautiful Unicode styles! Bold, italic, monospace, and decorative fonts for social media, messaging, and more.' }],
+    ['meta', { property: 'og:url', content: 'https://textalchemy.cc' }],
+    ['meta', { property: 'og:image', content: 'https://textalchemy.cc/web-app-manifest-512x512.png' }],
+    ['meta', { property: 'og:image:width', content: '512' }],
+    ['meta', { property: 'og:image:height', content: '512' }],
+    ['meta', { property: 'og:image:alt', content: 'TextAlchemy Chrome Extension Icon' }],
+    ['meta', { property: 'og:site_name', content: 'TextAlchemy' }],
+    
+    // Twitter Cards
+    ['meta', { name: 'twitter:card', content: 'summary' }],
+    ['meta', { name: 'twitter:title', content: 'TextAlchemy - Transform Text into Magical Unicode Styles' }],
+    ['meta', { name: 'twitter:description', content: 'Transform your plain text into beautiful Unicode styles! Bold, italic, monospace, and decorative fonts for social media, messaging, and more.' }],
+    ['meta', { name: 'twitter:image', content: 'https://textalchemy.cc/web-app-manifest-512x512.png' }],
+    ['meta', { name: 'twitter:image:alt', content: 'TextAlchemy Chrome Extension Icon' }],
+    
     // Meta tags
     ['meta', { name: 'theme-color', content: '#6C3EF4' }],
     ['meta', { name: 'msapplication-TileColor', content: '#6C3EF4' }],
