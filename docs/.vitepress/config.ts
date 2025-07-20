@@ -138,8 +138,16 @@ export default defineConfig({
   
   // Head configuration
   head: [
-    ['link', { rel: 'icon', href: '/icon48.png' }],
+    // Favicons
+    ['link', { rel: 'icon', href: '/favicon.ico' }],
+    ['link', { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' }],
+    ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' }],
+    ['link', { rel: 'manifest', href: '/site.webmanifest' }],
+    
+    // Meta tags
     ['meta', { name: 'theme-color', content: '#6C3EF4' }],
+    ['meta', { name: 'msapplication-TileColor', content: '#6C3EF4' }],
     ['meta', { name: 'google-site-verification', content: 'l_j6zqukjZdEe8L5S_5gg-LWjSBTooxS5xUNEEmXi-I' }]
   ],
 
